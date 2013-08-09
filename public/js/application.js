@@ -1,5 +1,3 @@
-
-
 // function onReady() {
 //   // alert('hi');
 //   $("form").submit(onSubmit);
@@ -35,31 +33,42 @@
 //     });
 //   });
 // });
-function load(url, callback) {
-  var xhr = new XMLHttpRequest(); 
-  xhr.onreadystatechange = ensureReadiness;
-  function ensureReadiness(){
-    if(xhr.readyState < 4){
-      return;
-    }
-    if(xhr.status !== 200){
-      alert('Shit got cray');
-    }
-    if(xhr.readyState === 4){
-      callback(xhr);
-    }
-    // console.log(xhr.responseText);
 
-  }
-  xhr.open('GET', '/rolls', true);
-  xhr.send("");
+
+
+//Not using JQuery
+window.onload = function (event) {
+    var form = document.getElementById('thing');
+    form.onsubmit = function (event) {
+        event.preventDefault();
+        load('/rolls', responseCallback);
+    };
+};
+
+function load(url, callback) {
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = ensureReadiness;
+
+    function ensureReadiness() {
+        if (xhr.readyState < 4) {
+            return;
+        }
+        if (xhr.status !== 200) {
+            alert('Shit got cray');
+        }
+        if (xhr.readyState === 4) {
+            callback(xhr);
+        }
+
+    }
+    xhr.open('GET', '/rolls', true);
+    xhr.send("");
 }
 
-load('/rolls', function(xhr){
-  dieNumber = xhr.responseText
-  die = dieNumber+".png";
-  document.getElementById('die').innerHTML = "<img src="+die+">";
-});
-// var ajax = {
-//   load: function()
-// }
+function responseCallback(xhr) {
+    dieNumber = xhr.responseText;
+    die = dieNumber + ".png";
+    document.getElementById('die').innerHTML = "<img src=" + die + ">";
+}
+
