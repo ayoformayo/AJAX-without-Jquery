@@ -1,3 +1,4 @@
+$(document).ready(onReady);
 function onReady() {
   $("form").submit(onSubmit);
 }
@@ -15,7 +16,6 @@ function onSuccess(success) {
   $('#die').html("<img src="+die+">");
 }
 
-$(document).ready(onReady);
 
 
 
