@@ -1,11 +1,9 @@
 function onReady() {
-  // alert('hi');
   $("form").submit(onSubmit);
 }
 
 function onSubmit(event) {
   event.preventDefault();
-  // alert('hi');
   var serialized = $("form").serialize();
   $.post('/rolls', serialized, onSuccess);
 }
@@ -15,28 +13,15 @@ function onSuccess(success) {
   dieNumber = String(success["roll"]);
   die = dieNumber+".png";
   $('#die').html("<img src="+die+">");
-  // console.log(die);
-  // $('#die').html(die);
 }
 
 $(document).ready(onReady);
 
-$(document).ready(function() {
-  $("form").submit(function(event){
-    event.preventDefault();
-    var serialized = $("form").serialize();
-    $.post('/rolls', serialized, function(success){
-      var newContainer = $(success).html();
-      
-      // html = $('html').filter('.container');
-     $('#die').html(newContainer);
-    });
-  });
-});
 
 
 
-//Not using JQuery
+
+// Not using JQuery
 // window.onload = function (event) {
 //     var form = document.getElementById('thing');
 //     form.onsubmit = function (event) {
