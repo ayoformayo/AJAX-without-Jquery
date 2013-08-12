@@ -9,12 +9,12 @@ post '/rolls' do
   # See: roll_if_value_is_nil method in the Roll model.
   p ">>>>>>>>>>>>>>>>>"
   p params
-  # value = params[:value] ? params[:value].to_i : nil
+  value = params[:value] ? params[:value].to_i : nil
 
-  # @roll = value ? Roll.create({ value: value }) : Roll.create
+  @roll = value ? Roll.create({ value: value }) : Roll.create
   
-  # content_type :json
-  # {roll: @roll.value}.to_json
+  content_type :json
+  {roll: @roll.value}.to_json
 end
 
 get '/rolls' do
